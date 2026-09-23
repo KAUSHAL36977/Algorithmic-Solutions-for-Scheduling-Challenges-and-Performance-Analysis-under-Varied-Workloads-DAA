@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "schedlab"
+version = "1.0.0"
+description = "Implement, simulate, benchmark and recommend scheduling algorithms under varied workloads."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = []  # the engine is pure standard library
+
+[project.optional-dependencies]
+app = ["streamlit>=1.40", "plotly>=5.19", "pandas>=2.0"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+schedlab = "schedlab.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["schedlab*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+extend-exclude = [".streamlit"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E731", "B905"]
+
+[tool.ruff.lint.per-file-ignores]
+"schedlab/recommender/knowledge_base.py" = ["E501"]
+"schedlab/algorithms/__init__.py" = ["E501"]
+"app/**" = ["E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["schedlab"]

@@ -1,0 +1,4 @@
+# Web app (the schedlab engine itself needs only the Python standard library)
+streamlit>=1.40
+plotly>=5.19
+pandas>=2.0
